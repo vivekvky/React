@@ -6,7 +6,10 @@ class ExportApplication extends Component {
 
 
     constructor(props) {
+
+        // console.log(props.match.params.SurveyorId);
         super(props);
+
         this.state = {
             surveyor: {
             },
@@ -14,27 +17,45 @@ class ExportApplication extends Component {
             error: false,
             new: true
         }
+
     }
 
     componentDidMount() {
-        this.props.fetchSurveyor();
-    }
-
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
-        if (!nextProps.new) {
-            if (nextProps.surveyor) {
-                this.setState({
-                    surveyor: nextProps.surveyor,
-                    new: false,
-                })
-            }
+        const { match: { params } } = this.props;
+        console.log(params.SurveyorId);
+        if (params.SurveyorId) {
+            this.setState({
+                new: false
+            })
+            this.props.fetchSurveyor(params.SurveyorId);
         } else {
             this.setState({
-                editing: true
+                editing: true,
+                new: true
             })
         }
     }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.surveyor && Object.keys(nextProps.match.params).length !== 0) {
+            this.setState({
+                surveyor: nextProps.surveyor,
+                new: false,
+                editing: true
+            })
+        } else if (Object.keys(nextProps.match.params).length === 0) {
+            this.setState({
+                surveyor: {
+                    'SurveyorCode': '', 'SurveyorName': '', 'ContactPerson': '', 'PhoneNo': '', 'EmailId': '', 'Address': '', 'Description': ''
+                },
+                editing: true,
+                error: false,
+                new: true
+            })
+        }
+
+    }
+
 
     changeModel(type, event) {
         var surveyorCopy = JSON.parse(JSON.stringify(this.state.surveyor));
@@ -58,10 +79,9 @@ class ExportApplication extends Component {
                 this.props.editSurveyor(this.state.surveyor);
             } else {
                 this.props.addSurveyor(this.state.surveyor);
+                
             }
-            this.setState({
-                editing: false
-            })
+            window.location.assign('/List');
         }
         this.setState({ error });
 

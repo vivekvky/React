@@ -10,8 +10,8 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchSurveyor: () => {
-      dispatch(fetchSurveyor());
+    fetchSurveyor: (id) => {
+      dispatch(fetchSurveyor(id));
     },
     editSurveyor: (surveyor) => {
       dispatch(editSurveyor(surveyor));

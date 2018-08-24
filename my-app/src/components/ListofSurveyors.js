@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { fetchAllSurveyor } from '../actions/actions_info';
-import ExportApplication from '../containers/App';
+import EditAdd from '../components/EditAdd';
+import { Route, Link } from 'react-router-dom'
+
 class ListofSurveyors extends Component {
 
     constructor(props) {
@@ -43,7 +45,7 @@ class ListofSurveyors extends Component {
                                     <th>Surveyor Code</th>
                                     <th>Contact person</th>
                                     <th>Phone</th>
-                                    {/* <th>Edit</th> */}
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,9 +56,9 @@ class ListofSurveyors extends Component {
                                             <td>{item.SurveyorCode}</td>
                                             <td>{item.ContactPerson}</td>
                                             <td>{item.PhoneNo}</td>
-                                            {/* <td>
-                                                <Button bsStyle="info" onClick={this.edit.bind(this, item.SurveyorId)}>Save</Button>
-                                            </td> */}
+                                            <td>
+                                                <Link to={`/surveyor/${item.SurveyorId}`}>Edit</Link>
+                                            </td>
                                         </tr>
                                     )
                                 })

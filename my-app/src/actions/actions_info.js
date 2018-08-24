@@ -17,8 +17,8 @@ export function fetchAllSurveyor() {
 
 export function fetchSurveyor(id) {
   return (dispatch) => {
-    // return fetch('http://localhost:54178/api/Surveyor/GetSurveyorbyId?surveyorId=' + id, {
-      return fetch('http://localhost:54178/api/Surveyor/GetSurveyorbyId?surveyorId=02082018-144522332-8c2cef35-9b44-4159-ab60-74f81e11b853', {
+    return fetch('http://localhost:54178/api/Surveyor/GetSurveyorbyId?surveyorId=' + id, {
+      // return fetch('http://localhost:54178/api/Surveyor/GetSurveyorbyId?surveyorId=02082018-144522332-8c2cef35-9b44-4159-ab60-74f81e11b853', {
       method: 'GET'
     })
       .then(response => response.json())
